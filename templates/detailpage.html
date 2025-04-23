@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto p-6 mt-10 bg-white rounded-2xl shadow-md border border-gray-200">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">User Profile</h2>
+    
+    <div class="space-y-4 text-gray-700 text-lg">
+        <div class="flex justify-between">
+            <span class="font-semibold">Username:</span>
+            <span>{{ profile.user.username }}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="font-semibold">Email:</span>
+            <span>{{ profile.user.email }}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="font-semibold">Name:</span>
+            <span>{{ profile.name }}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="font-semibold">Age:</span>
+            <span>{{ profile.age }}</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="font-semibold">Address:</span>
+            <span>{{ profile.address }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

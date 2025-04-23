@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<h1>Students</h1>
+<hr>
+{%for student in students%}
+  Id:{{student.pk}}
+  name:{{student.name}}
+  <br>
+  age:{{student.age}}
+  <br>
+  address:{{student.address}}
+  <br>
+
+<hr>
+{%endfor%}
+
+<form method ="post">
+  {%csrf_token%}   
+  <input type="text" placeholder="username" name = "username">
+  <button>Submit</button>
+</form>
+{%endblock content%}
+
+

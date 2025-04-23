@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-blue-600">MyWebsite</h1>
+            <ul class="flex space-x-6 text-sm font-medium text-gray-700">
+                <li><a href="{%url 'home'%}" class="hover:text-blue-500">Home</a></li>
+                <li><a href="{%url 'contact'%}" class="hover:text-blue-500">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="flex-grow container mx-auto px-6 py-8">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-inner px-6 py-4">
+        <div class="container mx-auto text-center text-sm text-gray-600">
+            © 2025 MyWebsite. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
