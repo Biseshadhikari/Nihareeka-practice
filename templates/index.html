@@ -1,9 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="max-w-7xl mx-auto px-6 py-12">
+  <div class="flex flex-col md:flex-row gap-8">
+    
+    <!-- Sidebar: Post Creation Form -->
+    <div class="w-full md:w-1/3 bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-xl font-bold mb-4">Create a Post</h2>
+      <form method="POST"  class="space-y-4" novalidate>
+        {% csrf_token %}
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Title</label>
+          <input type="text" name="title" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Content</label>
+          <textarea name="content" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required></textarea>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Post</button>
+      </form>
+    </div>
 
-  <div class="max-w-7xl mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 gap-8">
+    <!-- Main Content: Post Feed -->
+    <div class="w-full md:w-2/3 grid grid-cols-1 gap-8">
       {% for post in posts %}
         <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
           <div class="flex items-center space-x-4">
@@ -14,28 +33,30 @@
           </div>
 
           <div class="mt-4">
-            <a href = "{%url 'postdetail' post.id%}" class="text-2xl font-bold">{{ post.title }}</a>
-            <p class="mt-2 text-gray-700">{{ post.content|truncatechars:9  }}</p>
+            <a href="{% url 'postdetail' post.id %}" class="text-2xl font-bold">{{ post.title }}</a>
+            <p class="mt-2 text-gray-700">{{ post.content|truncatechars:100 }}</p>
           </div>
-          {%if request.user == post.user%}
+
+          {% if request.user == post.user %}
           <div class="mt-4 flex space-x-6">
-            <a href="" class="flex items-center text-red-600 hover:text-red-800">
+            <a href="{% url 'postdelete' post.id %}" class="flex items-center text-red-600 hover:text-red-800">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
               Delete
             </a>
             
-            <a href="" class="flex items-center text-blue-600 hover:text-blue-800">
+            <a href="{% url 'postupdate' post.id %}" class="flex items-center text-blue-600 hover:text-blue-800">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16M4 12h16"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16M4 12h16"/>
               </svg>
               Update
             </a>
           </div>
-          {%endif%}
+          {% endif %}
         </div>
       {% endfor %}
     </div>
   </div>
+</div>
 {% endblock %}
