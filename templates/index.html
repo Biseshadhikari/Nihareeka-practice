@@ -1,25 +1,24 @@
-{%extends 'base.html'%}
-{%block content%}
+{% extends 'base.html' %}
 
-<h1>Students</h1>
-<hr>
-{%for student in students%}
-  Id:{{student.pk}}
-  name:{{student.name}}
-  <br>
-  age:{{student.age}}
-  <br>
-  address:{{student.address}}
-  <br>
+{% block content %}
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 gap-8">
+      {% for post in posts %}
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="flex items-center space-x-4">
+            <div>
+              <h3 class="text-xl font-semibold">{{ post.user.username }}</h3>
+              <p class="text-gray-500 text-sm">{{ post.created_at|date:"F j, Y, g:i a" }}</p>
+            </div>
+          </div>
 
-<hr>
-{%endfor%}
+          <div class="mt-4">
+            <a href = "{%url 'postdetail' post.id%}" class="text-2xl font-bold">{{ post.title }}</a>
+            <p class="mt-2 text-gray-700">{{ post.content|truncatechars:9  }}</p>
+          </div>
 
-<form method ="post">
-  {%csrf_token%}   
-  <input type="text" placeholder="username" name = "username">
-  <button>Submit</button>
-</form>
-{%endblock content%}
-
-
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

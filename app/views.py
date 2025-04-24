@@ -4,13 +4,9 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):
-    if request.method =="POST": 
-        print(request.POST.get('username'))
-    students = Profile.objects.all()
-    context = { 
-        "students":students
-    }
-    return render(request,'index.html',context)
+    posts = Post.objects.all().order_by("-updated_at")
+
+    return render(request,'index.html',{"posts":posts})
 
 
 
@@ -29,5 +25,13 @@ def profileDetail(request,username):
     return render(request,'detailpage.html',context)
     
 
-def contact(request): 
-    return render(request,'contact.html')
+def postdetail(request,id): 
+    try : 
+        post = Post.objects.get(id = id)
+
+
+
+    except: 
+        return render(request,'404.html')
+
+    return render(request,'postdetail.html',{'post':post})
