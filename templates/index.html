@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
   <div class="max-w-7xl mx-auto px-6 py-12">
     <div class="grid grid-cols-1 gap-8">
       {% for post in posts %}
@@ -16,7 +17,23 @@
             <a href = "{%url 'postdetail' post.id%}" class="text-2xl font-bold">{{ post.title }}</a>
             <p class="mt-2 text-gray-700">{{ post.content|truncatechars:9  }}</p>
           </div>
-
+          {%if request.user == post.user%}
+          <div class="mt-4 flex space-x-6">
+            <a href="" class="flex items-center text-red-600 hover:text-red-800">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              Delete
+            </a>
+            
+            <a href="" class="flex items-center text-blue-600 hover:text-blue-800">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16M4 12h16"></path>
+              </svg>
+              Update
+            </a>
+          </div>
+          {%endif%}
         </div>
       {% endfor %}
     </div>
