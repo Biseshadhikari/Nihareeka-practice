@@ -20,7 +20,9 @@ def home(request):
 def profileDetail(request,username): 
     try :
         user = User.objects.get(username = username) #bisesh
-        profile = Profile.objects.get(user = user) #bisesh ko profile 
+        profile = Profile.objects.get(user = user)
+
+         #bisesh ko profile 
 
     except: 
         return render(request,'404.html')
@@ -34,19 +36,22 @@ def profileDetail(request,username):
 def postdetail(request,id): 
     try : 
         post = Post.objects.get(id = id)
-
+        # images = post.images_set.all() if there is no related name # object_set
+        #images = post.images.all()
+        images = Images.objects.select_related('post').filter(post=post) #optimized
 
 
     except: 
         return render(request,'404.html')
 
-    return render(request,'postdetail.html',{'post':post})
+    return render(request,'postdetail.html',{'post':post,'images':images})
 
 
 
 def Postdelete(request,id): 
     try : 
         post = Post.objects.get(id = id)
+        
 
     except: 
         return render(request,'404.html')

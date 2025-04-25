@@ -17,6 +17,6 @@ class Post(models.Model):
 
 
 class Images(models.Model): 
-    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name="images")
     img = models.ImageField(upload_to='img/')
 
