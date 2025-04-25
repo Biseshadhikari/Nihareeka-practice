@@ -16,3 +16,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True,null = True,blank=True)
 
 
+class Images(models.Model): 
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    img = models.ImageField(upload_to='img/')
+
