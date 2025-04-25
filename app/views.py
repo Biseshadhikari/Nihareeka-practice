@@ -8,9 +8,14 @@ def home(request):
     if request.method == "POST": 
         title = request.POST.get('title')
         content = request.POST.get('content')
+        images = request.FILES.getlist('images')
+        
         if title == "" or content == "": 
             return redirect('/')
-        Post.objects.create(title = title ,content= content,user = request.user)
+        post = Post.objects.create(title = title ,content= content,user = request.user)
+        for image in images: 
+            Images.objects.create(post =post,img=image)
+
         return redirect('/')
     return render(request,'index.html',{"posts":posts})
 
