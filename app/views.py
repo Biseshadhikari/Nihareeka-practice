@@ -16,6 +16,10 @@ def home(request):
         for image in images: 
             Images.objects.create(post =post,img=image)
 
+        # Images.objects.bulk_create([
+        #         Images(post=post, img=image) for image in images
+        # ])
+
         return redirect('/')
     return render(request,'index.html',{"posts":posts})
 
